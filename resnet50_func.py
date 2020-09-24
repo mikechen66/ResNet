@@ -6,6 +6,10 @@
 """
 ResNet50 model for Keras.
 
+Please pay more attention on the formal argument "x". To faciliate the process of parameter passing
+during the function calls in the context, we select x to express the recursion that is the typical
+mathematical usage.
+
 Please remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If
 the env of Keras is 'channels_first', please change to the TensorFlow convention. While runnning
 the script of predict.py, it shows the result as follows. 
