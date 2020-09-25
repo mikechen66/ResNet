@@ -84,7 +84,7 @@ def identity_block(input_tensor, kernel_size, filters, stage, block):
     x = Conv2D(filters3, (1,1), name=conv_name_base + '2c')(x)
     x = BatchNormalization(name=bn_name_base + '2c')(x)
 
-    # Takes as input a list of same shape tensors and returns a single tensor. 
+    # Take as input a list of same shape tensors and return a single tensor. 
     x = layers.add([x, input_tensor])
     x = Activation('relu')(x)
 
