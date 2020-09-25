@@ -21,8 +21,8 @@ Predicted: [[('n01930112', 'nematode', 0.13556267), ('n03207941', 'dishwasher', 
 
 Issues:
 
-It is quite strange that the Inception v3 has The total parameter is 23+ million that is far less
-than the official number of 92+ million. Please see the paper with opening the weblink as follows.
+Even adopting the validation_utils of imageNet and changing the prediction method in predict_val.py, 
+the prediction is extremely than the inception v4 model. So we need to improve the ResNet training.
 
 Changes:
 
