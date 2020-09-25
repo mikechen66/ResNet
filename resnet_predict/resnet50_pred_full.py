@@ -71,8 +71,8 @@ for gpu in gpus:
     tf.config.experimental.set_memory_growth(gpu, True)
 
 
-WEIGHTS_PATH = '/home/mic/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels.h5'
-WEIGHTS_PATH_NO_TOP = '/home/mic/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
+WEIGHTS_PATH = '/home/mike/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels.h5'
+WEIGHTS_PATH_NO_TOP = '/home/mike/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 
 def identity_block(input_tensor, kernel_size, filters, stage, block):
@@ -247,7 +247,7 @@ if __name__ == '__main__':
     model = ResNet50(input_shape, num_classes, weights, include_top)
     model.summary()
 
-    img_path = '/home/mic/Documents/keras_resnet_v1/plane.jpg'
+    img_path = '/home/mike/Documents/keras_resnet_v1/plane.jpg'
     img = image.load_img(img_path, target_size=(224, 224))
     output = preprocess_input(img)
 
