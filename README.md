@@ -1,4 +1,4 @@
-# ResNet
+# ResNet 18-152
 
 Residual Network (ResNet) is a CNN architecture which was designed to enable hundreds or thousands 
 of convolutional layers. It includes both the identity shortcut and the convolutional blocks that 
