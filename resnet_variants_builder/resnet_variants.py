@@ -15,7 +15,7 @@ mathematical usage.
 Please remember it is the TensorFlow realization with image_data_foramt = 'channels_last'. Please 
 change to the TensorFlow convention.
 
-Make the the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
+Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
 11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated 
 code. 
 
