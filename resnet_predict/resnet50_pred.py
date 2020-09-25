@@ -6,15 +6,31 @@
 """
 ResNet50 model for Keras.
 
-Please remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If
-the env of Keras is 'channels_first', please change to the TensorFlow convention. 
+Please pay more attention on the formal argument "x". To faciliate the process of parameter passing
+during the function calls in the context, we select x to express the recursion that is the typical
+mathematical usage. 
+
+Remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If the env 
+of Keras is 'channels_first', please change it according to the TensorFlow convention. 
+
+$ python resnet50_predict.py
+
+Predicted: [[('n01930112', 'nematode', 0.13556267), ('n03207941', 'dishwasher', 0.032914065), 
+('n03041632', 'cleaver', 0.02433419), ('n03804744', 'nail', 0.022761008), ('n02840245', 'binder', 
+0.019043112)]]
+
+Issues:
+
+It is quite strange that the Inception v3 has The total parameter is 23+ million that is far less
+than the official number of 92+ million. Please see the paper with opening the weblink as follows.
+
+Changes:
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
 other published results. I would like to thank all of them for the contributions. 
 
-Make the the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
-11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated 
-code. 
+Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
+11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new code to replace the deprecated code. 
 
 Environment: 
 
@@ -55,8 +71,8 @@ for gpu in gpus:
     tf.config.experimental.set_memory_growth(gpu, True)
 
 
-WEIGHTS_PATH = '/home/mic/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels.h5'
-WEIGHTS_PATH_NO_TOP = '/home/mic/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
+WEIGHTS_PATH = '/home/mike/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels.h5'
+WEIGHTS_PATH_NO_TOP = '/home/mike/keras_dnn_models/resnet50_weights_tf_dim_ordering_tf_kernels_notop.h5'
 
 
 def identity_block(input_tensor, kernel_size, filters, stage, block):
@@ -119,39 +135,30 @@ def conv_block(input_tensor, kernel_size, filters, stage, block, strides=(2,2)):
     return x
 
 
-def ResNet50(include_top=True, weights='imagenet', input_tensor=None, 
-             input_shape=None, pooling=None, classes=1000):
+def ResNet50(input_shape, num_classes, weights, include_top, input_tensor=None, pooling=None):
     # Instantiates the ResNet50 architecture.
     """
     Arguments
+        input_shape: Set (224,224,3) and height being larger than 197.
         include_top: whether to include the FC Layer at the top of the network.
+        num_classes: specify 'include_top' is True for 1000.
         weights: None or imagenet (pre-training on ImageNet).
-        input_tensor: Keras tensor (output of layers.Input() as image input
-        input_shape: Set (224, 224, 3) and height being larger than 197.
-        pooling: pooling mode for feature extraction when 'include_top' is False.
+        input_tensor: Keras tensor, output of layers
+        pooling: pooling mode for feature extraction while 'include_top' is False.
             - None: output of 4D tensor output of the last convolutional layer.
             - avg: global average pooling for the last conv layer with 2D tensor.
             - max: global max pooling being applied.
-        classes: only being specified if 'include_top' is True or no 'weights'
     Return
         A Keras model instance.
     """
-    if weights not in {'imagenet', None}:
-        raise ValueError('The `weights` argument should be either '
-                         '`None` (random initialization) or `imagenet` '
-                         '(pre-training on ImageNet).')
-
-    if weights == 'imagenet' and include_top and classes != 1000:
-        raise ValueError('If using `weights` as imagenet with `include_top`'
-                         ' as true, `classes` should be 1000')
-
-    # Correct 'include_top=include_top' to 'require_flatten=include_top' 
-    input_shape = _obtain_input_shape(input_shape,
-                                      default_size=224,
-                                      min_size=197,
-                                      data_format=K.image_data_format(),
+    input_shape = _obtain_input_shape(input_shape, 
+                                      default_size=224, 
+                                      min_size=197, 
+                                      data_format=None, # -K.image_data_format()
                                       require_flatten=include_top)
 
+    # Input() initizate a 3D shape(weight,height,channels) into a 4D tensor(batch, 
+    # weight,height,channels). If no batch size, it is defaulted as None.
     if input_tensor is None:
         img_input = Input(shape=input_shape)
     else:
@@ -159,14 +166,14 @@ def ResNet50(include_top=True, weights='imagenet', input_tensor=None,
             img_input = Input(tensor=input_tensor, shape=input_shape)
         else:
             img_input = input_tensor
-
+    
     x = ZeroPadding2D((3,3))(img_input)
     x = Conv2D(64, (7,7), strides=(2,2), name='conv1')(x)
     x = BatchNormalization(name='bn_conv1')(x)
     x = Activation('relu')(x)
     x = MaxPooling2D((3,3), strides=(2,2))(x)
 
-    x = conv_block(x, 3, [64,64,256], stage=2, block='a', strides=(1, 1))
+    x = conv_block(x, 3, [64,64,256], stage=2, block='a', strides=(1,1))
     x = identity_block(x, 3, [64,64,256], stage=2, block='b')
     x = identity_block(x, 3, [64,64,256], stage=2, block='c')
 
@@ -190,7 +197,7 @@ def ResNet50(include_top=True, weights='imagenet', input_tensor=None,
 
     if include_top:
         x = Flatten()(x)
-        x = Dense(classes, activation='softmax', name='fc1000')(x)
+        x = Dense(num_classes, activation='softmax', name='fc1000')(x)
     else:
         if pooling == 'avg':
             x = GlobalAveragePooling2D()(x)
@@ -203,7 +210,7 @@ def ResNet50(include_top=True, weights='imagenet', input_tensor=None,
     else:
         inputs = img_input
 
-    # Build the model with the 4D tensors.
+    # Build the model with both the inputs and outputs in the 4D tensors.
     model = Model(inputs, x, name='resnet50')
 
     # Add 'by_name=True' into model.load_weights() for a correct shape. 
@@ -230,9 +237,15 @@ def preprocess_input(x):
 
 if __name__ == '__main__':
 
-    model = ResNet50(include_top=True, weights='imagenet')
+    input_shape = (224,224,3)
+    num_classes = 1000
+    weights='imagenet'
+    include_top = True 
 
-    img_path = '/home/mic/Documents/keras_inception_v4/elephant.jpg'
+    model = ResNet50(input_shape, num_classes, weights, include_top)
+    model.summary()
+
+    img_path = '/home/mike/Documents/keras_resnet_v1/plane.jpg'
     img = image.load_img(img_path, target_size=(224, 224))
     output = preprocess_input(img)
 
