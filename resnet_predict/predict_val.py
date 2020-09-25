@@ -19,6 +19,9 @@ Predicted: [[('n01930112', 'nematode', 0.13556267), ('n03207941', 'dishwasher', 
 ('n03041632', 'cleaver', 0.02433419), ('n03804744', 'nail', 0.022761008), ('n02840245', 'binder', 
 0.019043112)]]
 
+Even adopting the validation_utils of imageNet and change the prediction method in the script, the 
+prediction is extremely than the inception v4 model. So we need to improve the ResNet training.
+
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
 other published results. I would like to thank all of them for the contributions. 
 
