@@ -133,7 +133,7 @@ def ResNet50(input_shape, num_classes, weights, include_top,
     Return
         A Keras model instance.
     """
-    # Input() initizate a 3-D shape(weight,height,channels) into a 4-D tensor(batch, 
+    # Input() initizate a 3D shape(weight,height,channels) into a 4D tensor(batch, 
     # weight,height,channels). If no batch size, it is defaulted as None.
     input_shape = _obtain_input_shape(input_shape,
                                       default_size=224,
