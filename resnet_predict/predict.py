@@ -7,14 +7,16 @@
 ResNet50 model for Keras.
 
 Please remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If
-the env of Keras is 'channels_first', please change it  according to the TensorFlow convention. The 
-prediction is extremely than the inception v4 model. Therefore, we need to improve the method.  
+the env of Keras is 'channels_first', please change it  according to the TensorFlow convention. 
 
 $ python predict.py
 
 Predicted: [[('n01930112', 'nematode', 0.13556267), ('n03207941', 'dishwasher', 0.032914065), 
 ('n03041632', 'cleaver', 0.02433419), ('n03804744', 'nail', 0.022761008), ('n02840245', 'binder', 
 0.019043112)]]
+
+Even adopting the validation_utils of imageNet and change the prediction method in predict_val.py, the 
+prediction is extremely than the inception v4 model. So we need to improve the ResNet training.
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
 other published results. I would like to thank all of them for the contributions. 
