@@ -8,7 +8,7 @@ network explore more effective feature space of the source image.
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
 other published results. I would like to thank all of them for the contributions. 
 
-Make the the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
+Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
 11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated 
 
 
