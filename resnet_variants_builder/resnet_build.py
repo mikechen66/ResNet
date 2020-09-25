@@ -50,7 +50,8 @@ def _bn_relu(input):
 
 
 def _conv_bn_relu(**conv_params):
-    # Helper to build a conv -> BN -> relu block
+    # Helper to build a conv-> BN->relu block; **conv_params is keyword argument
+    # with the pair of key and value in the dictionary type . 
     filters = conv_params["filters"]
     kernel_size = conv_params["kernel_size"]
     strides = conv_params.setdefault("strides", (1,1))
@@ -69,7 +70,7 @@ def _conv_bn_relu(**conv_params):
 
 
 def _bn_relu_conv(**conv_params):
-    # Helper to build a BN -> relu -> conv block.
+    # Helper to build a BN -> relu -> conv block; **conv_params as same as above 
     filters = conv_params["filters"]
     kernel_size = conv_params["kernel_size"]
     strides = conv_params.setdefault("strides", (1,1))
@@ -128,6 +129,7 @@ def basic_block(filters, init_strides=(1,1), is_block1_of_layer1=False):
             conv1 = _bn_relu_conv(filters=filters, kernel_size=(3,3), strides=init_strides)(input)
 
         residual = _bn_relu_conv(filters=filters, kernel_size=(3,3))(conv1)
+        # Call the above function of  _short_cut() with the actual arguments of input and residual
         return _shortcut(input, residual)
 
     return f
@@ -147,7 +149,7 @@ def bottleneck(filters, init_strides=(1,1), is_block1_of_layer1=False):
         residual = _bn_relu_conv(filters=filters*4, kernel_size=(1,1))(conv_3_3)
 
         return _shortcut(input, residual)
-
+    # Return f as _shortcut(input, residual)
     return f
 
 
@@ -160,10 +162,10 @@ def _handle_dim_ordering():
 
 
 def _get_block(identifier):
-    # Please note identifier as a formal argument
+    # Please note that "identifier" is a formal parameter
     if isinstance(identifier, six.string_types):
         res = globals().get(identifier)
-        if not res:
+        if not res: # res is a abbr of result(to address a vairable)
             raise ValueError('Invalid {}'.format(identifier))
         return res
 
@@ -203,7 +205,7 @@ class ResnetBuilder(object):
 
         block = pool1
         filters = 64
-        for i, r in enumerate(repetitions):
+        for i, r in enumerate(repetitions): # i: index, r: repetitions 
             block = _residual_block(block_fn, filters=filters, repetitions=r, is_layer1=(i==0))(block)
             filters *= 2
 
