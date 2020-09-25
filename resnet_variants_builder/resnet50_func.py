@@ -13,6 +13,11 @@ mathematical usage.
 Remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If the env 
 of Keras is 'channels_first', please change it according to the TensorFlow convention. 
 
+Issue:
+
+Even adopting the validation_utils of imageNet and changing the prediction method in predict_val.py, 
+the prediction is extremely than the inception v4 model. So we need to improve the ResNet training.
+
 Change:
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
