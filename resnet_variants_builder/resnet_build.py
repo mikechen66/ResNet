@@ -3,28 +3,28 @@
 # resnet_build.py
 
 """
-It is the builder of ResNet Network that is used to create 18, 34, 50, 101, 152 levels
-network. Since the 1000-levels ResNet is not economical in the computation, so it not
-include the huge ResNet. 
+The builder of ResNet Network that is used to create 18, 34, 50, 101, 152 levels network. 
+Since the 1000-levels ResNet is not economical in the computation, so it not include the 
+huge ResNet. 
 
 Helper to build a BN -> relu -> conv block. This is an improved scheme proposed in the 
 following weblink.
 
 http://arxiv.org/pdf/1603.05027v2.pdf
 
-For basic_block, basic 3X3 convolution blocks for use on resnets with layers<=34. Follows 
-improved proposed scheme in the following weblink. 
+For basic_block, basic 3X3 convolution blocks for use on resnets with layers<=34. Please
+look at the improved proposed scheme in the following weblink. 
 
 http://arxiv.org/pdf/1603.05027v2.pdf
 
-For bottleneck, bottleneck architecture for > 34 layer resnet. Follows improved proposed 
-scheme in the weblink as follows. 
+For bottleneck, bottleneck architecture for > 34 layer resnet. Please take the following 
+paper for reference.
 
 http://arxiv.org/pdf/1603.05027v2.pdf
 
-For _shortcut(), add a shortcut between input and residual block and merge them with "sum". 
-Expand channels of shortcut to match residual. Stride appropriately to match residual (width,
-height); should be int if the architecture is correctly configured.
+The function of  _shortcut() adds a shortcut between input and residual block and merge 
+them with "sum". Expand channels of shortcut to match residual. Stride appropriately to 
+match residual (width,height); should be int if the architecture is correctly configured.
 
 It is simplified script based lamsade.dauphine. I would like to thank all of them for the 
 contributions. 
