@@ -1,8 +1,8 @@
 
 resnet_weights_dlownload
 
-It is quick to download the weight by the wget. It has the ecursive download feature to 
-download everything under the specified directory. 
+It is quick to download the weight by the wget. It has the recursive download feature to download everything 
+under the specified directory. 
 
 ResNet101:
 Weights for TF: 
@@ -22,7 +22,7 @@ $ wget –r https://dl.dropboxusercontent.com/s/up7iq2far6w2gk1/resnet152_weight
 
 Notes: 
 
-Users can try to run the script to download the weights. But it usually generates the temination issue
+Users can try to run the script to download the weights. But it usually generates the termination issue
 becuase the function of get_file() has a big problem with dropbox. 
 
 ResNet101:
