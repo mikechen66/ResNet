@@ -1,7 +1,7 @@
 
 resnet_weights_dlownload
 
-It is quick to download the weight by the wget. It has the ecursive download feature to 
+It is quick to download the weight by the wget. It has the recursive download feature to 
 download everything under the specified directory. 
 
 ResNet101:
