@@ -149,7 +149,7 @@ def identity_block(input_tensor, kernel_size, filters, stage, block):
     # Return
         Return a intermidiary value 'x'
     """
-    eps = 1.1e-5
+    eps = 1.2e-5
 
     if K.image_data_format() == 'channels_last':
         bn_axis = -1
@@ -198,7 +198,7 @@ def conv_block(input_tensor, kernel_size, filters, stage, block, strides=(2,2)):
         Return a intermidiary value 'x'
     """
 
-    eps = 1.1e-5
+    eps = 1.2e-5
     if K.image_data_format() == 'channels_last':
         bn_axis = -1
     else:
@@ -287,7 +287,7 @@ def ResNet101(input_shape, num_classes, include_top, weights,
     else:
         bn_axis = 1
 
-    eps = 1.1e-5
+    eps = 1.2e-5
 
     x = ZeroPadding2D((3,3), name='conv1_zeropadding')(img_input)
     x = Conv2D(64, (7,7), strides=(2, 2), name='conv1', use_bias=False)(x)
