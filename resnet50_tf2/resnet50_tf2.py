@@ -5,18 +5,25 @@ ResNet50 model for Keras.
 
 Please pay more attention on the formal argument "x". To faciliate the process of parameter passing
 during the function calls in the context, we select x to express the recursion that is the typical
-mathematical usage. Please run the script with the command as follows. 
+mathematical usage. Remember it is the TensorFlow realization with image_data_foramt = 'channels_last'. 
+If the env of Keras is 'channels_first', please change it according to the TensorFlow convention. 
+Please run the script with the command as follows. 
 
 $ python resnet50_tf2.py
 
-Remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If the env 
-of Keras is 'channels_first', please change it according to the TensorFlow convention. 
+Even adopting the validation_utils of imageNet and changing prediction methods in predict_val.py, its 
+correctedness is extremely lower than Inception v3 becuase the residual layer increases the "raw" data 
+greatly. So it is subject to the brute force computing, i.e., updating the moving average from 100 to 
+1000 epochs before converging to the "real" mean and variance. That's why ResNet predicts a wrong result 
+in the early stages. Please verify it by forcing the BatchNorm Layer to run in the "Training mode".
 
 The total size of parameters is about 20 million that is in the range of the official ResNet network. 
-User can change the total parameters with resizing the kernel size.  
+User can change the total parameters with resizing the kernel size. 
 
-Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
-11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new code to replace the deprecated code. 
+The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan,and other 
+published results. I would like to thank all of them for the contributions. Make the necessary changes 
+to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 11.0, cuDNN 8.0.1 and CUDA 
+450.57. In addition, write the new code to replace the deprecated code. 
 
 Environment: 
 
