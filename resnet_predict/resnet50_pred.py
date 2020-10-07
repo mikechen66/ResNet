@@ -20,13 +20,16 @@ Predicted: [[('n01930112', 'nematode', 0.13556267), ('n03207941', 'dishwasher', 
 0.019043112)]]
 
 Even adopting the validation_utils of imageNet and changing the prediction method in predict_val.py, 
-the prediction is extremely than the inception v4 model. So we need to improve the ResNet training.
+the correctedness is extremely lower than the inception v4 model becuase the residual layer greatly 
+increases the "raw" data. So it is subject to the brute force computing, i.e., update the moving
+average from 100 to 1000 epochs before converging to the "real" mean and variance. That's why the 
+prediction was wrong in the early stages with ResNet. Users can verify it by forcing the BatchNorm 
+Layer to run in the "Training mode".
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
-other published results. I would like to thank all of them for the contributions. 
-
-Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
-11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new code to replace the deprecated code. 
+other published results. I would like to thank all of them for the contributions. Make the necessary 
+changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 11.0, cuDNN 8.0.1 
+and CUDA 450.57. In addition, write the new code to replace the deprecated code. 
 
 Environment: 
 
