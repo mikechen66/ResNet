@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# resnet152_predict.py
+
 """
 ResNet152 model for Keras.
 
@@ -11,14 +13,17 @@ mathematical usage.
 Remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If the env 
 of Keras is 'channels_first', please change it according to the TensorFlow convention. 
 
-$ python rn152_predict.py
+$ python resnet152_predict.py
 
-It is quite strange that the prediciton is much slower than Inception v3 or v4. Please see the paper 
-with opening the weblink as follows.
+Even adopting the validation_utils of imageNet and changing prediction methods in predict_val.py, its 
+correctedness is extremely lower than Inception v3 becuase the residual layer increases the "raw" data 
+greatly. So it is subject to the brute force computing, i.e., updating the moving average from 100 to 
+1000 epochs before converging to the "real" mean and variance. That's why ResNet predicts a wrong result 
+in the early stages. Please verify it by forcing the BatchNorm Layer to run in the "Training mode".
 
-Custom Layer for ResNet used for BatchNormalization. Learns a set of weights and biases used for 
-scaling the input data. The output consists simply in an element-wise multiplication of the input
-and a sum of a set of constants:
+Custom Layer for ResNet used for BatchNormalization. Learns a set of weights and biases used for scaling 
+the input data. The output consists simply in an element-wise multiplication of the inputand a sum of a 
+set of constants:
 
     out = in*gamma + beta,
 
