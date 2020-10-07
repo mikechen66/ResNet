@@ -154,7 +154,8 @@ def identity_block(input_tensor, kernel_size, filters, stage, block):
     else:
         bn_axis = 1
 
-    filters1, filters2, filters3 = filters
+    [filters1, filters2, filters3] = filters
+    
     conv_name_base = 'res' + str(stage) + block + '_branch'
     bn_name_base = 'bn' + str(stage) + block + '_branch'
     scale_name_base = 'scale' + str(stage) + block + '_branch'
@@ -203,7 +204,8 @@ def conv_block(input_tensor, kernel_size, filters, stage, block, strides=(2,2)):
     else:
         bn_axis = 1
 
-    filters1, filters2, filters3 = filters
+    [filters1, filters2, filters3] = filters
+    
     conv_name_base = 'res' + str(stage) + block + '_branch'
     bn_name_base = 'bn' + str(stage) + block + '_branch'
     scale_name_base = 'scale' + str(stage) + block + '_branch'
