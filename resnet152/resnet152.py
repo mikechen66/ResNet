@@ -13,8 +13,11 @@ of Keras is 'channels_first', please change it according to the TensorFlow conve
 
 $ python rn152_predict.py
 
-It is quite strange that the prediciton is much slower than Inception v3 or v4. Please see the paper 
-with opening the weblink as follows.
+Even adopting the validation_utils of imageNet and changing prediction methods in predict_val.py, its 
+correctedness is extremely lower than Inception v3 becuase the residual layer increases the "raw" data 
+greatly. So it is subject to the brute force computing, i.e., updating the moving average from 100 to 
+1000 epochs before converging to the "real" mean and variance. That's why ResNet predicts a wrong result 
+in the early stages. Please verify it by forcing the BatchNorm Layer to run in the "Training mode".
 
 Custom Layer for ResNet used for BatchNormalization. Learns a set of weights and biases used for 
 scaling the input data. The output consists simply in an element-wise multiplication of the input
@@ -25,10 +28,9 @@ and a sum of a set of constants:
 where 'gamma' and 'beta' are the weights and biases larned.
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan, Felix Yu
-and other published results. I would like to thank all of them for the contributions. 
-
-Make the necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 
-11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new code to replace the deprecated code. 
+and other published results. I would like to thank all of them for the contributions. Make the necessary 
+changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 11.0, cuDNN 8.0.1 and 
+CUDA 450.57. In addition, write the new code to replace the deprecated code. 
 
 Environment: 
 
