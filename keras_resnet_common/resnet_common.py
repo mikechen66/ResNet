@@ -40,7 +40,7 @@ from keras.applications.imagenet_utils import decode_predictions
 from imagenet_utils import _obtain_input_shape
 from keras.engine.topology import get_source_inputs
 
-
+"""
 # Set up the GPU memory size to avoid the out-of-memory error
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -53,7 +53,7 @@ if gpus:
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
     # Virtual devices must be set before GPUs have been initialized
-    print(e)
+    print(e)"""
 
 
 BASE_WEIGHTS_PATH = (
@@ -397,7 +397,7 @@ def ResNet50(include_top=True, weights='imagenet', input_tensor=None,
 
 
 def ResNet101(include_top=True, weights='imagenet', input_tensor=None, 
-              input_shape=None, pooling=None, classes=1000, **kwargs):
+              input_shape=None, pooling=None, num_classes=1000, **kwargs):
 
     def stack_fn(x):
         x = stack1(x, 64, 3, stride1=1, name='conv2')
@@ -408,7 +408,7 @@ def ResNet101(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, True, 'resnet101', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet152(include_top=True, weights='imagenet', input_tensor=None,
@@ -423,7 +423,7 @@ def ResNet152(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, True, 'resnet152', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet50V2(include_top=True, weights='imagenet', input_tensor=None,
@@ -438,7 +438,7 @@ def ResNet50V2(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet50v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet101V2(include_top=True, weights='imagenet', input_tensor=None,
@@ -453,7 +453,7 @@ def ResNet101V2(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet101v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet152V2(include_top=True, weights='imagenet',input_tensor=None,
@@ -468,7 +468,7 @@ def ResNet152V2(include_top=True, weights='imagenet',input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet152v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNeXt50(include_top=True, weights='imagenet', input_tensor=None,
@@ -483,7 +483,7 @@ def ResNeXt50(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, False, 'resnext50', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNeXt101(include_top=True, weights='imagenet', input_tensor=None,
@@ -498,7 +498,7 @@ def ResNeXt101(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, False, 'resnext101', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 setattr(ResNet50, '__doc__', ResNet.__doc__)
