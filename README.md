@@ -5,7 +5,7 @@ of convolutional layers. It includes both the identity shortcut and the convolut
 elimiate the gradient descent vanlshing. All layers that are expanded and the residual parts of the 
 network explore more effective feature space of the source image. 
 
-Only ResNet50V2 predicts a much higher accuracy(82%) while other ResNet models are worse rate(16%~60%). 
+Only ResNet50V2 predicts the much higher accuracy(82%) while other ResNet models are worse rate(16%~60%). 
 It is caused by the residual. While momentum is defaulted as 0.99, moving_mean and moving_variance are 
 initialized to 0 and 1 respecfully in the BatchNorm. So it is necessary to update the moving average
 from 100 to 1000 epochs before converging to the "real" mean and variance. That's why the prediction 
