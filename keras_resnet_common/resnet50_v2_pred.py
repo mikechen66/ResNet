@@ -1,5 +1,35 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# resnet50_v2_pred.py
+
 """
 ResNet, ResNetV2, and ResNeXt models for Keras.
+
+ResNet50V2 is the most accurate model for prection on any given image in the ResNet family. Even 
+though it has the small total size of parameters about 25+ million, its accuracy is much highers. 
+Other ResNet models such as ResNeXt101 has the 240+ million, but its prediction is much lowers.
+Users need to run the script with the online weights downloading in the runtime or run the script 
+after downloading the weights. 
+
+Please remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If
+the env of Keras is 'channels_first', please change it according to the TensorFlow convention. The 
+prediction is extremely than the inception v4 model. Therefore, we need to improve the method. 
+
+$ python resnet50_v2_pred.py
+
+The script has many modifications on the foundation of is ResNet Common by Francios Chollet. Make the 
+necessary changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 11.0, cuDNN 
+8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated code. 
+
+Environment: 
+
+Ubuntu 18.04 
+TensorFlow 2.3
+Keras 2.4.3
+CUDA Toolkit 11.0, 
+cuDNN 8.0.1
+CUDA 450.57. 
 
 # Reference papers
 - [Deep Residual Learning for Image Recognition]
@@ -10,7 +40,6 @@ ResNet, ResNetV2, and ResNeXt models for Keras.
   (https://arxiv.org/abs/1611.05431) (CVPR 2017)
 
 # Reference implementations
-
 - [TensorNets]
   (https://github.com/taehoonlee/tensornets/blob/master/tensornets/resnets.py)
 - [Caffe ResNet]
@@ -397,7 +426,7 @@ def ResNet50(include_top=True, weights='imagenet', input_tensor=None,
 
 
 def ResNet101(include_top=True, weights='imagenet', input_tensor=None, 
-              input_shape=None, pooling=None, classes=1000, **kwargs):
+              input_shape=None, pooling=None, num_classes=1000, **kwargs):
 
     def stack_fn(x):
         x = stack1(x, 64, 3, stride1=1, name='conv2')
@@ -408,7 +437,7 @@ def ResNet101(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, True, 'resnet101', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet152(include_top=True, weights='imagenet', input_tensor=None,
@@ -423,7 +452,7 @@ def ResNet152(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, True, 'resnet152', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet50V2(include_top=True, weights='imagenet', input_tensor=None,
@@ -438,7 +467,7 @@ def ResNet50V2(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet50v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet101V2(include_top=True, weights='imagenet', input_tensor=None,
@@ -453,7 +482,7 @@ def ResNet101V2(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet101v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNet152V2(include_top=True, weights='imagenet',input_tensor=None,
@@ -468,7 +497,7 @@ def ResNet152V2(include_top=True, weights='imagenet',input_tensor=None,
         return x
 
     return ResNet(stack_fn, True, True, 'resnet152v2', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNeXt50(include_top=True, weights='imagenet', input_tensor=None,
@@ -483,7 +512,7 @@ def ResNeXt50(include_top=True, weights='imagenet', input_tensor=None,
         return x
 
     return ResNet(stack_fn, False, False, 'resnext50', include_top, weights,
-                  input_tensor, input_shape, pooling, classes, **kwargs)
+                  input_tensor, input_shape, pooling, num_classes, **kwargs)
 
 
 def ResNeXt101(include_top=True, weights='imagenet', input_tensor=None,
@@ -524,12 +553,12 @@ def preprocess_input(x):
 
 if __name__ == '__main__':
 
-    model = ResNeXt101(include_top=True, weights='imagenet', input_tensor=None, 
+    model = ResNet50V2(include_top=True, weights='imagenet', input_tensor=None, 
                        input_shape=(224,224,3), pooling=None, num_classes=1000)
 
     model.summary()
 
-    img_path = '/home/mike/Documents/keras_resnet_common/images/cat.jpg'
+    img_path = '/home/mike/Documents/keras_resnet_common/images/plane.jpg'
     img = image.load_img(img_path, target_size=(224, 224))
     output = preprocess_input(img)
 
