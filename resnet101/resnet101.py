@@ -246,7 +246,7 @@ def conv_block(input_tensor, kernel_size, filters, stage, block, strides=(2,2)):
 
 def ResNet101(input_shape, num_classes, include_top, weights, 
               input_tensor=None, pooling=None):
-    # Instantiates the ResNet152 architecture.
+    # Instantiates the ResNet101 architecture.
     """
     Arguments: 
         include_top: whether to include the FC layer at the top of the network.
