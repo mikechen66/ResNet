@@ -20,7 +20,7 @@ the deprecated code.
 - [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 """
 
-import resnet
+
 import numpy as np
 import tensorflow as tf
 from keras.preprocessing import image
