@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# resnet152_predict.py
-
 """
 ResNet152 model for Keras.
 
@@ -13,17 +11,14 @@ mathematical usage.
 Remember that it is the TensorFlow realization with image_data_foramt = 'channels_last'. If the env 
 of Keras is 'channels_first', please change it according to the TensorFlow convention. 
 
-$ python resnet152_predict.py
+$ python rn152_predict.py
 
-Even adopting the validation_utils of imageNet and changing prediction methods in predict_val.py, its 
-correctedness is extremely lower than Inception v3 becuase the residual layer increases the "raw" data 
-greatly. So it is subject to the brute force computing, i.e., updating the moving average from 100 to 
-1000 epochs before converging to the "real" mean and variance. That's why ResNet predicts a wrong result 
-in the early stages. Please verify it by forcing the BatchNorm Layer to run in the "Training mode".
+It is quite strange that the prediciton is much slower than Inception v3 or v4. Please see the paper 
+with opening the weblink as follows.
 
-Custom Layer for ResNet used for BatchNormalization. Learns a set of weights and biases used for scaling 
-the input data. The output consists simply in an element-wise multiplication of the inputand a sum of a 
-set of constants:
+Custom Layer for ResNet used for BatchNormalization. Learns a set of weights and biases used for 
+scaling the input data. The output consists simply in an element-wise multiplication of the input
+and a sum of a set of constants:
 
     out = in*gamma + beta,
 
@@ -93,6 +88,13 @@ if gpus:
 
 WEIGHTS_PATH = '/home/mike/keras_dnn_models/resnet152_weights_tf.h5'
 
+eps = 1.2e-5
+
+if K.image_data_format() == 'channels_last':
+    bn_axis = -1
+else:
+    bn_axis = 1
+
 
 class Scale(Layer):
     # Custom Layer for ResNet used for BatchNormalization.
@@ -154,12 +156,6 @@ def identity_block(input_tensor, kernel_size, filters, stage, block):
     # Return
         Return a intermidiary value 'x'
     """
-    eps = 1.2e-5
-
-    if K.image_data_format() == 'channels_last':
-        bn_axis = -1
-    else:
-        bn_axis = 1
 
     filters1, filters2, filters3 = filters
     conv_name_base = 'res' + str(stage) + block + '_branch'
@@ -202,13 +198,6 @@ def conv_block(input_tensor, kernel_size, filters, stage, block, strides=(2,2)):
     # Return
         Return a intermidiary value 'x'
     """
-
-    eps = 1.2e-5
-
-    if K.image_data_format() == 'channels_last':
-        bn_axis = -1
-    else:
-        bn_axis = 1
 
     filters1, filters2, filters3 = filters
     conv_name_base = 'res' + str(stage) + block + '_branch'
@@ -287,13 +276,6 @@ def ResNet152(input_shape, num_classes, include_top, weights,
             img_input = Input(tensor=input_tensor, shape=input_shape, name='data')
         else:
             img_input = input_tensor
-
-    if K.image_data_format() == 'channels_last':
-        bn_axis = -1
-    else:
-        bn_axis = 1
-
-    eps = 1.2e-5
 
     x = ZeroPadding2D((3,3), name='conv1_zeropadding')(img_input)
     x = Conv2D(64, (7,7), strides=(2,2), name='conv1', use_bias=False)(x)
@@ -377,8 +359,4 @@ if __name__ == '__main__':
     model.compile(optimizer=sgd, loss='categorical_crossentropy', metrics=['accuracy'])
 
     out = model.predict(im)
-    # 281
-    # -print(np.argmax(out))
     print('Predicted:', decode_predictions(out))
-
-    
