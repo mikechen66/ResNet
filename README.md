@@ -12,6 +12,6 @@ moving average from 100 to 1000 epochs before converging to the "real" mean and 
 the prediction was wrong in the early stages with ResNet.
 
 The script has many changes on the foundation of is ResNet50 by Francios Chollet, BigMoyan and many 
-other published results. I would like to thank all of them for the contributions. ake the necessary 
+other published results. I would like to thank all of them for the contributions. Make the necessary 
 changes to adapt to the environment of TensorFlow 2.3, Keras 2.4.3, CUDA Toolkit 11.0, cuDNN 8.0.1 
 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated. 
