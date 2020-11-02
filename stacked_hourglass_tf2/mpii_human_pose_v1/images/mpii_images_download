@@ -1,0 +1,13 @@
+
+mpii_images_download
+
+Please download the zipped images and then unzip the file into the directory of images. The file of annotantions is not used in the stacked_hourglass application.
+
+Please use the qBittorrent in the global market and xunlei is used in China to speed
+up the download. Otherwise, it would be quite slow in consideration of the large size of the images file. 
+
+You can download the images and annotations from the MPII Human Pose benchmark here:
+Images (12.9 GB)
+Annotations (12.5 MB)
+
+http://human-pose.mpi-inf.mpg.de/#download
