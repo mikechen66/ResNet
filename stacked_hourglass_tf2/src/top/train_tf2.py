@@ -3,8 +3,8 @@
 
 import sys
 
-sys.path.insert(0, "../data_gen/")
-sys.path.insert(0, "../net/")
+sys.path.insert(0, "/home/mic/Documents/stacked_hourglass_tf2/src/data_gen/")
+sys.path.insert(0, "/home/mic/Documents/stacked_hourglass_tf2/src/net/")
 
 import argparse
 import os
@@ -13,7 +13,6 @@ import tensorflow as tf
 from keras import backend as k
 from hourglass import HourglassNet
 import tensorflow as tf 
-
 
 """
 # Set up the GPU memory size to avoid the out-of-memory error
@@ -28,12 +27,12 @@ if gpus:
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
     # Virtual devices must be set before GPUs have been initialized
-    print(e)
+    print(e)"""
 
 # Set up the GPU to avoid the runtime error: Could not create cuDNN handle...
 gpus = tf.config.experimental.list_physical_devices('GPU')
 for gpu in gpus:
-    tf.config.experimental.set_memory_growth(gpu, True)"""
+    tf.config.experimental.set_memory_growth(gpu, True)
     
 
 if __name__ == "__main__":
@@ -55,6 +54,7 @@ if __name__ == "__main__":
     os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
     os.environ["CUDA_VISIBLE_DEVICES"] = str(args.gpuID)
 
+    """
     # TensorFlow wizardry
     # -config = tf.ConfigProto()
     config = tf.compat.v1.ConfigProto()
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     # -k.tensorflow_backend.set_session(tf.Session(config=config))
     # AttributeError: module 'keras.backend' has no attribute 'set_session'
     # -k.set_session(tf.Session(config=config))
-    tf.compat.v1.keras.backend.set_session(tf.compat.v1.Session(config=config))
+    tf.compat.v1.keras.backend.set_session(tf.compat.v1.Session(config=config))"""
 
     if args.tiny:
         xnet = HourglassNet(num_classes=16, num_stacks=args.num_stack, num_channels=128, inres=(192, 192),
