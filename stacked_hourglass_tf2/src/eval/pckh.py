@@ -10,7 +10,7 @@ import os
 
 
 def run_pckh(model_name, predfile):
-    detection = loadmat('/home/mike/Documents/keras_stacked_hourglass/data/mpii/detections.mat')
+    detection = loadmat('/home/mike/Documents/stacked_hourglass_tf2/data/mpii/detections.mat')
     det_idxs = detection['RELEASE_img_index']
     debug = 0
     threshold = 0.5
@@ -18,7 +18,7 @@ def run_pckh(model_name, predfile):
 
     pa = [2, 3, 7, 7, 4, 5, 8, 9, 10, 0, 12, 13, 8, 8, 14, 15]
 
-    dict = loadmat('/home/mike/Documents/keras_stacked_hourglass/data/mpii/detections_our_format.mat')
+    dict = loadmat('/home/mike/Documents/stacked_hourglass_tf2/data/mpii/detections_our_format.mat')
     print(dict.keys())
     dataset_joints = dict['dataset_joints']
     jnt_missing = dict['jnt_missing']
