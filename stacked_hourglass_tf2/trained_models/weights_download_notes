@@ -1,7 +1,8 @@
-Please download the weights
+weights_download_notes
 
-If the zipped pre-trained models have any problem, please download the 
-pre-trained models as follows. 
+Please note that the uppper directory has already included the weights for any specific file.
+If users have any problem with the zipped pre-trained models have any problem, please download 
+the pre-trained models as follows. 
 
 1.hg_s2_b1
 eights_epoch96.h5
