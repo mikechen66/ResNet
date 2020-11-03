@@ -1,16 +1,17 @@
 
 How to run the scripts 
 
-The script is based on the people including Alejandro Newell, Kaiyu Yang, and Jia Deng and 
-interpretors such as yuanyuanli85. I would like to thank all of them for the contributions. 
+The script is based on the people including Alejandro Newell, Kaiyu Yang, and Jia Deng and interpretors 
+such as yuanyuanli85. I would like to thank all of them for the contributions. 
 
-Make the necessary changes to adapt to the environment of TensorFlow 2.2, Keras 2.4.3, CUDA 
-Toolkit 11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace 
-the deprecated.
+Make the necessary changes to adapt to the environment of TensorFlow 2.2, Keras 2.4.3, CUDA Toolkit 11.0, 
+cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace the deprecated.
 
 1.run demo_tf2
 
 Run a quick demo to predict sample image
+
+$ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
 
 $ python demo_tf2.py --gpuID 0 --model_json ../../trained_models/hg_s2_b1/net_arch.json  --model_weights ../../trained_models/hg_s2_b1/weights_epoch96.h5  --conf_threshold 0.1 --input_image ../../images/sample.jpg
 
@@ -18,17 +19,13 @@ $ python demo_tf2.py --gpuID 0 --model_json ../../trained_models/hg_s2_b1/net_ar
 
 Train from scratch, use python train.py --help to check all the valid arguments.
 
+$ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
+
 $ python train_tf2.py --gpuID 0 --epochs 100 --batch_size 24 --num_stack 2 --model_path ../../trained_models/hg_s2_b1_mobile
 
 3.run eval_tf2
 
-python eval.py --gpuID 0 --model_weights ../../trained_models/hg_s2_b1_mobile/weights_epoch93.h5  --model_json ../../trained_models/hg_s2_b1_mobile/net_arch.json --mat_file ../../trained_models/hg_s2_b1_mobile/preds.mat --num_stack 2
+$ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
 
-
-
-
-
-
-
-
+$ python eval.py --gpuID 0 --model_weights ../../trained_models/hg_s2_b1_mobile/weights_epoch93.h5  --model_json ../../trained_models/hg_s2_b1_mobile/net_arch.json --mat_file ../../trained_models/hg_s2_b1_mobile/preds.mat --num_stack 2
 
