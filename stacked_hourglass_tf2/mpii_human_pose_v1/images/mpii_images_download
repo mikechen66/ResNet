@@ -19,3 +19,6 @@ Images (12.9 GB)
 Annotations (12.5 MB)
 
 http://human-pose.mpi-inf.mpg.de/#download
+
+The directory of iamges is used to hold the dataset of MPII images After completion of the dataset download, users can choose 
+to delete the file of mpii_images_download. 
