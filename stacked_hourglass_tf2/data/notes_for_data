@@ -1,3 +1,6 @@
 Notes
 
-Please unzip the zippped document into the directory of data
+
+Please unzip the zippped document into the directory of data. It have the three files including 
+detections.mat, detections_our_format.mat and mpii_annotations.json. After completion of unzipping 
+the data, users can choose to delete the file of notes_for_data. 
