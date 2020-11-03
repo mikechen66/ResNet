@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+
 import argparse
 import matplotlib.pyplot as plt
 import os
