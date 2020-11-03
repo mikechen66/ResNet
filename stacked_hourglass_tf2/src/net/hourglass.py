@@ -4,8 +4,8 @@
 
 import sys
 
-sys.path.insert(0, "../data_gen/")
-sys.path.insert(0, "../eval/")
+sys.path.insert(0, "/home/mike/Documents/stacked_hourglass_tf2/src/data_gen/")
+sys.path.insert(0, "/home/mike/Documents/stacked_hourglass_tf2/src/eval/")
 
 import os
 from hg_blocks import create_hourglass_network, euclidean_loss, bottleneck_block, bottleneck_mobile
@@ -44,7 +44,7 @@ class HourglassNet(object):
             self.model.summary()
 
     def train(self, batch_size, model_path, epochs):
-        train_dataset = MPIIDataGen("/home/mike/Documents/keras_stacked_hourglass/data/mpii/mpii_annotations.json", 
+        train_dataset = MPIIDataGen("/home/mike/Documents/stacked_hourglass_tf2/data/mpii/mpii_annotations.json", 
                                     "/home/mike/datasets/mpii_human_pose_v1/images",
                                     inres=self.inres, outres=self.outres, is_train=True)
         train_gen = train_dataset.generator(batch_size, self.num_stacks, sigma=1, is_shuffle=True,
@@ -70,7 +70,7 @@ class HourglassNet(object):
         self.load_model(model_json, model_weights)
         self.model.compile(optimizer=RMSprop(lr=5e-4), loss=mean_squared_error, metrics=["accuracy"])
 
-        train_dataset = MPIIDataGen("/home/mike/Documents/keras_stacked_hourglass/data/mpii/mpii_annotations.json", 
+        train_dataset = MPIIDataGen("/home/mike/Documents/stacked_hourglass_tf2/data/mpii/mpii_annotations.json", 
                                     "/home/mike/datasets/mpii_human_pose_v1/images",
                                     inres=self.inres, outres=self.outres, is_train=True)
 
