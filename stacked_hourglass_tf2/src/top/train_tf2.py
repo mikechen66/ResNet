@@ -11,6 +11,9 @@ $ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
 # Run the command as follows. 
 $ python train_tf2.py --gpuID 0 --epochs 100 --batch_size 24 --num_stack 2 --model_path ../../trained_models/hg_s2_b1_mobile
 
+Please note the GPU Memory probably generates the OOM (out-of-memory) error after executing 
+and showing some iterations if users have only Nvidia RTX 2070 Super or below. 
+
 The script is based on the people including Alejandro Newell, Kaiyu Yang, and Jia Deng and 
 interpretors such as yuanyuanli85. I would like to thank all of them for the contributions. 
 
