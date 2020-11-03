@@ -10,7 +10,7 @@ $ python demo_tf2.py --gpuID 0 --model_json ../../trained_models/hg_s2_b1/net_ar
 
 2.run train_tf2
 
-Train from scratch, use python train.py --help to check all the valid arguments.
+Train from scratch, use python train_tf2.py --help to check all the valid arguments.
 
 $ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
 $ python train_tf2.py --gpuID 0 --epochs 100 --batch_size 24 --num_stack 2 --model_path ../../trained_models/hg_s2_b1_mobile
