@@ -10,7 +10,7 @@ import os
 
 
 def run_pckh(model_name, predfile):
-    detection = loadmat('../../data/mpii/detections.mat')
+    detection = loadmat('/home/mike/Documents/keras_stacked_hourglass/data/mpii/detections.mat')
     det_idxs = detection['RELEASE_img_index']
     debug = 0
     threshold = 0.5
