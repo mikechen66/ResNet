@@ -4,9 +4,9 @@
 
 import sys
 
-sys.path.insert(0, "/home/mike/Documents/keras_stacked_hourglass/src/data_gen/")
-sys.path.insert(0, "/home/mike/Documents/keras_stacked_hourglass/src/net/")
-sys.path.insert(0, "/home/mike/Documents/keras_stacked_hourglass/src/eval/")
+sys.path.insert(0, "/home/mike/Documents/stacked_hourglass_tf2/src/data_gen/")
+sys.path.insert(0, "/home/mike/Documents/stacked_hourglass_tf2/src/net/")
+sys.path.insert(0, "/home/mike/Documents/stacked_hourglass_tf2/src/eval/")
 
 import os
 import numpy as np
