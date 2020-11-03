@@ -1,0 +1,7 @@
+notes_sample
+
+It is only used for the demo of one sample image. For the training, please adopt the large
+dataset of mpii_human_pose_v1 with diretory as follows. 
+
+./mpii_human_pose_v1//images
+
