@@ -1,6 +1,24 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+"""
+How to run the scripts 
+
+Train from scratch, use python train_tf2.py --help to check all the valid arguments.
+
+# Enter into the current directory
+$ cd /home/mike/Documents/stacked_hourglass_tf2/src/top
+# Run the command as follows. 
+$ python train_tf2.py --gpuID 0 --epochs 100 --batch_size 24 --num_stack 2 --model_path ../../trained_models/hg_s2_b1_mobile
+
+The script is based on the people including Alejandro Newell, Kaiyu Yang, and Jia Deng and 
+interpretors such as yuanyuanli85. I would like to thank all of them for the contributions. 
+
+Make the necessary changes to adapt to the environment of TensorFlow 2.2, Keras 2.4.3, CUDA 
+Toolkit 11.0, cuDNN 8.0.1 and CUDA 450.57. In addition, write the new lines of code to replace 
+the deprecated.
+"""
+
 import sys
 
 sys.path.insert(0, "/home/mic/Documents/stacked_hourglass_tf2/src/data_gen/")
